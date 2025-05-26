@@ -15,12 +15,12 @@ $db_pass = "";
 $db = new Database($db_host, $db_name, $db_user, $db_pass);
 $db->contect();
 
-// chèn file SiteController.php có class SiteController
+// Chèn file SiteController.php có class SiteController
 require_once 'Controller/SiteController.php';
 // khởi tạo đối tượng controller từ lớp SiteController. Đây chính là bộ điều khiển
 $controller = new SiteController($baseUrl, $db);
 
-// chèn header
+// Chèn header
 include 'Views/header.php';
 
 // chèn các nội dung chính của trang
