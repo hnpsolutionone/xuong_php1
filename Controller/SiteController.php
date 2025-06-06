@@ -22,6 +22,7 @@ class SiteController {
         $baseUrl = $this->baseUrl;
         $cart = new Cart($this->db);
         $cart->addToCart();
+        var_dump($_SESSION['cart']);
         // sau đó gán data vào tầng View
         include 'Views/cart.php';
     }
@@ -53,7 +54,7 @@ class SiteController {
         include 'Views/product_detail.php';
     }
 
-    function login() {
+    public function login() {
         $baseUrl = $this->baseUrl;
         $error = "";
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -76,7 +77,7 @@ class SiteController {
         include 'Views/login.php';
     }
 
-    function register() {
+    public function register() {
         $baseUrl = $this->baseUrl;
         $errorReg = "";
         $success = "";
