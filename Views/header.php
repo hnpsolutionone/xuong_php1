@@ -88,19 +88,16 @@
             </li>
             <li><a href="javascript:void(0);">Tài Khoản</a>
               <ul class="nav-dropdown nav-submenu">
-                <li><a href="index.php?page=login">Đăng nhập</a></li>
-                <li><a href="index.php?page=login">Đăng kí</a></li>
-                <li><a>Trang Quản Trị</a></li>
-                <li><a href="index.php?page=login&action=logout">Đăng Xuất</a></li>
-
+                <?php if (isset($_SESSION['userInfo']) && !empty($_SESSION['userInfo']['fullname'])): ?>
+                  <li><a>Trang Quản Trị</a></li>
+                  <li><a href="<?=$baseUrl?>index.php?page=logout">Đăng Xuất</a></li>
+                <?php else: ?>
+                <li><a href="<?=$baseUrl?>index.php?page=login">Đăng nhập</a></li>
+                <li><a href="<?=$baseUrl?>index.php?page=login">Đăng kí</a></li>
+                <?php endif; ?>
               </ul>
             </li>
-            <li><a>Xin Chào Admin</a></li>
-
-
-
-
-
+            <li><a>Xin Chào <?=$_SESSION['userInfo']['fullname']??'Guest'?></a></li>
           </ul>
         </div>
       </nav>

@@ -1,4 +1,5 @@
 <?php
+require "Model/User.php";
 class SiteController {
     public $baseUrl;
     public $db;
@@ -33,5 +34,66 @@ class SiteController {
         $product = $this->db->getProductDetail($id);
         // sau đó gán data vào tầng View
         include 'Views/product_detail.php';
+    }
+
+    function login() {
+        $baseUrl = $this->baseUrl;
+        $error = "";
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $username = $_POST['username'] ?? '';
+            $password = $_POST['password'] ?? '';
+
+            if (empty($username) || empty($password)) {
+                $error = "Dữ liệu không được phép rỗng";
+            } else {
+                $user = new User($this->db);
+                if ($userInfo = $user->login($username, $password)) {
+                    $_SESSION['userInfo'] = ['username' => $userInfo['username'], 'fullname' => $userInfo['fullname']];
+                    header("Location: index.php");
+                    exit;
+                } else {
+                    $error = 'Tên đăng nhập hoặc tài khoản không đúng.';
+                }
+            }
+        }
+        include 'Views/login.php';
+    }
+
+    function register() {
+        $baseUrl = $this->baseUrl;
+        $errorReg = "";
+        $success = "";
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $username = $_POST['username'] ?? '';
+            $fullname = $_POST['fullname'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'];
+            $rePassword = $_POST['rePassword'];
+
+            if($password != $rePassword) {
+                $errorReg = "Mật khẩu không khớp.";
+            } else {
+                $user = new User($this->db);
+                $user->username = $username;
+                $user->fullname = $fullname;
+                $user->email = $email;
+                $user->password = $password;
+                $user->role = 'user';
+
+                if ($user->createUser()) {
+                    $success = 'Tạo tài khoản thành công! Bạn có thể đăng nhập.';
+                } else {
+                    $errorReg = 'Lỗi khi tạo tài khoản.';
+                }
+            }
+        }
+        
+        include 'Views/login.php';
+    }
+
+    public function logout() {
+        unset($_SESSION['userInfo']);
+        header("Location: index.php");
+        exit;
     }
 }

@@ -565,17 +565,17 @@
 
 </div>
 
-  <script src="./assets/js/jquery.min.js"></script>
-  <script src="./assets/js/popper.min.js"></script>
-  <script src="./assets/js/bootstrap.min.js"></script>
-  <script src="./assets/js/ion.rangeSlider.min.js"></script>
-  <script src="./assets/js/slick.js"></script>
-  <script src="./assets/js/slider-bg.js"></script>
-  <script src="./assets/js/lightbox.js"></script>
-  <script src="./assets/js/smoothproducts.js"></script>
-  <script src="./assets/js/snackbar.min.js"></script>
-  <script src="./assets/js/jQuery.style.switcher.js"></script>
-  <script src="./assets/js/custom.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/jquery.min.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/popper.min.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/bootstrap.min.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/ion.rangeSlider.min.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/slick.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/slider-bg.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/lightbox.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/smoothproducts.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/snackbar.min.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/jQuery.style.switcher.js"></script>
+  <script src="<?=$baseUrl?>/Views/assets/js/custom.js"></script>
   <script>
     function openWishlist() {
       document.getElementById("Wishlist").style.display = "block";
