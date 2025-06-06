@@ -1,5 +1,6 @@
 <?php
 require "Model/User.php";
+require "Model/Cart.php";
 class SiteController {
     public $baseUrl;
     public $db;
@@ -15,6 +16,22 @@ class SiteController {
         $products = $this->db->getAllProducts();
         // sau đó gán data vào tầng View
         include 'Views/home.php';
+    }
+
+    public function cart() {
+        $baseUrl = $this->baseUrl;
+        $cart = new Cart($this->db);
+        $cart->addToCart();
+        // sau đó gán data vào tầng View
+        include 'Views/cart.php';
+    }
+
+    public function removeItemCart() {
+        $id = $_GET['id'] ?? 0;
+        $cart = new Cart($this->db);
+        $cart->deleteItem($id);
+        header("Location: index.php?page=cart");
+        exit;
     }
 
     // hàm index sẽ gọi trang sản phẩm
