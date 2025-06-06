@@ -22,7 +22,7 @@ class SiteController {
         $baseUrl = $this->baseUrl;
         $cart = new Cart($this->db);
         $cart->addToCart();
-        var_dump($_SESSION['cart']);
+        //var_dump($_SESSION['cart']);
         // sau đó gán data vào tầng View
         include 'Views/cart.php';
     }
