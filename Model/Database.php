@@ -5,7 +5,7 @@ class Database
     private $db_name;
     private $db_user;
     private $db_pass;
-    private $connection;
+    public $connection;
 
     public function __construct($db_host, $db_name, $db_user, $db_pass)
     {
