@@ -82,7 +82,7 @@
               </a>
             </li>
             <li>
-              <a href="#" onclick="openCart()">
+              <a href="<?=$baseUrl?>index.php?page=cart">
                 <i class="lni lni-shopping-basket"></i><span class="dn-counter theme-bg">3</span>
               </a>
             </li>

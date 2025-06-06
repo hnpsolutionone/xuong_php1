@@ -117,10 +117,11 @@
         </div>
 
         <div class="prt_05 mb-4">
+          <form action="<?=$baseUrl?>index.php?page=cart" method="POST">
           <div class="form-row mb-7">
             <div class="col-12 col-lg-auto">
               <!-- Quantity -->
-              <select class="mb-2 custom-select">
+              <select name="quantity" class="mb-2 custom-select">
                 <option value="1" selected="">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -129,8 +130,12 @@
               </select>
             </div>
             <div class="col-12 col-lg">
+              <input type="hidden" name="image" value="<?=$product['image']?>">
+              <input type="hidden" name="name" value="<?=$product['name']?>">
+              <input type="hidden" name="price" value="<?=$product['price']?>">
+              <input type="hidden" name="id" value="<?=$product['id']?>">
               <!-- Submit -->
-              <button type="submit" class="btn btn-block custom-height bg-dark mb-2">
+              <button type="submit" name="addToCart" value="addToCart" class="btn btn-block custom-height bg-dark mb-2">
                 <i class="lni lni-shopping-basket mr-2"></i>Add to Cart
               </button>
             </div>
@@ -141,6 +146,7 @@
               </button>
             </div>
           </div>
+          </form>
         </div>
 
         <div class="prt_06">
