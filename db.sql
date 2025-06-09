@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2025 at 07:01 AM
+-- Generation Time: Jun 09, 2025 at 10:14 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,16 +63,39 @@ CREATE TABLE `comments` (
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `order_code` varchar(20) NOT NULL,
+  `order_code` varchar(100) NOT NULL,
   `receiver_name` varchar(100) NOT NULL,
   `receiver_address` varchar(255) NOT NULL,
   `receiver_mobile` varchar(20) NOT NULL,
   `total_price` double(11,2) NOT NULL,
   `delivery_date` date NOT NULL,
-  `payment_method` int(1) NOT NULL,
+  `payment_method` varchar(100) NOT NULL,
   `status` int(1) NOT NULL,
-  `order_date` date NOT NULL
+  `order_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `order_code`, `receiver_name`, `receiver_address`, `receiver_mobile`, `total_price`, `delivery_date`, `payment_method`, `status`, `order_date`) VALUES
+(2, 6, 'ORDER_20250609-085832', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 905.00, '2025-06-09', 'VNPAY', 1, '2025-06-09'),
+(3, 6, 'ORDER_20250609-090124', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 550.00, '2025-06-09', 'VNPAY', 1, '2025-06-09'),
+(4, 6, 'ORDER_20250609-092741', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPAY', 1, '2025-06-09'),
+(5, 6, 'ORDER_20250609-092949', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPAY', 1, '2025-06-09'),
+(6, 6, 'ORDER_20250609-094057', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(7, 6, 'ORDER_20250609-094203', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 550.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(8, 6, 'ORDER_20250609-094453', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(9, 6, 'ORDER_20250609-094744', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 105.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(10, 6, 'ORDER_20250609-095201', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 105.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(11, 6, 'ORDER_20250609-095255', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 105.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(12, 6, 'ORDER_20250609-095314', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(13, 6, 'ORDER_20250609-095324', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(14, 6, 'ORDER_20250609-095724', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 105.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(15, 6, 'ORDER_20250609-095921', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(16, 6, 'ORDER_20250609-100040', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 305.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(17, 6, 'ORDER_20250609-100219', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 305.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(18, 6, 'ORDER_20250609-100929', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 2055.00, '2025-06-09', 'VNPay', 1, '2025-06-09');
 
 -- --------------------------------------------------------
 
@@ -87,6 +110,35 @@ CREATE TABLE `order_details` (
   `quantity` int(11) NOT NULL,
   `price` double(11,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
+(1, 2, 3, 2, 200.00),
+(2, 2, 2, 2, 200.00),
+(3, 2, 1, 1, 105.00),
+(4, 3, 2, 1, 200.00),
+(5, 3, 5, 1, 350.00),
+(6, 4, 2, 1, 200.00),
+(7, 5, 2, 1, 200.00),
+(8, 6, 2, 1, 200.00),
+(9, 7, 5, 1, 350.00),
+(10, 7, 3, 1, 200.00),
+(11, 8, 2, 1, 200.00),
+(12, 9, 1, 1, 105.00),
+(13, 10, 1, 1, 105.00),
+(14, 12, 2, 1, 200.00),
+(15, 14, 1, 1, 105.00),
+(16, 15, 2, 1, 200.00),
+(17, 16, 2, 1, 200.00),
+(18, 16, 1, 1, 105.00),
+(19, 17, 3, 1, 200.00),
+(20, 17, 1, 1, 105.00),
+(21, 18, 1, 1, 105.00),
+(22, 18, 3, 1, 200.00),
+(23, 18, 5, 5, 350.00);
 
 -- --------------------------------------------------------
 
@@ -111,7 +163,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `image`, `price`, `sale_price`, `quantity`, `status`) VALUES
-(1, 2, 'Áo thun', 'Áo thun 1\r\nÁo thun 2\r\nÁo thun 3', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/2.jpg', 100.00, 99.00, 10, 1),
+(1, 2, 'Áo thun 2 edit', 'Áo thun 5Áo thun 2Áo thun 3Áo thun 4Áo thun 5', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/2.jpg', 105.00, 95.00, 15, 0),
 (2, 2, 'Áo Polo nam', 'Áo Polo nam 1\r\nÁo Polo nam 2\r\nÁo Polo nam 3', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/5.jpg', 200.00, 199.00, 10, 1),
 (3, 2, 'Váy nữ model 01', 'Váy nữ model 01\r\nVáy nữ model 01\r\nVáy nữ model 01', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/1.jpg', 200.00, 199.00, 19, 1),
 (4, 2, 'Collot Full Dress', 'Collot Full Dress\r\nCollot Full Dress\r\nCollot Full Dress', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/2.jpg', 450.00, 400.00, 20, 1),
@@ -143,7 +195,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `image`, `birthday`, `email`, `mobile`, `address`, `role`) VALUES
 (1, 'phuongnguyen', '123456', 'Nguyen Le Phuong', '', '2025-06-26', 'hnpsolution@gmail.com', '0987543212', '123/3B quang trung', '1'),
 (2, 'lephong', '12345678', 'Nguyen Phong', '', '2025-06-18', 'lephong@gmail.com', '0987543212', '123/3B Quang Trung', '1'),
-(6, 'hnpsolution', '$2y$10$t2Wg3oblUDP64RIqb4l5buNwdpI3hFkeHt9TiY2enTXv4wSK48FGW', 'Nguyễn Lê Phương', NULL, NULL, 'hnpsolution@gmail.com', NULL, NULL, 'user');
+(6, 'hnpsolution', '$2y$10$t2Wg3oblUDP64RIqb4l5buNwdpI3hFkeHt9TiY2enTXv4wSK48FGW', 'Nguyễn Lê Phương', NULL, NULL, 'hnpsolution@gmail.com', '0987543212', '123/3B Quang Trung', 'user'),
+(7, 'phuongnl21', '$2y$10$M0AJXzJBsrj0JCUq39i5TOtKaoteS3SB9hB849A//bQv4CmgMzc7G', 'Nguyễn Lê Phương', NULL, NULL, 'phuongnl21@fpt.edu.vn', NULL, NULL, 'user');
 
 --
 -- Indexes for dumped tables
@@ -210,13 +263,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -228,7 +281,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
