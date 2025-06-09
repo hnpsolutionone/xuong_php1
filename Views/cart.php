@@ -16,6 +16,7 @@
                     <tbody>
                         <?php 
                         $total = 0;
+                        if(isset($_SESSION['cart']) && count($_SESSION['cart'])):
                         foreach ($_SESSION['cart'] as $id => $item): 
                         $total += $item['price']*$item['quantity'];
                         ?>
@@ -40,7 +41,8 @@
                                 </td>
                             </tr>
                             <?php
-                        endforeach ?>
+                        endforeach;
+                        endif?>
                     </tbody>
                 </table>
                 <div class="col-md-12">
@@ -51,7 +53,7 @@
                 </div>
                 <div class="col-md-2 mt-5 mb-5">
                     <button class="btn btn-sm btn-success float-end me-2 d-block">
-                        Đặt hàng
+                        <a href="<?=$baseUrl?>index.php?page=checkout">Đặt hàng</a>
                     </button>
                 </div>
             </div>
