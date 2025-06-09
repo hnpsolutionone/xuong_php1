@@ -48,4 +48,42 @@ class Cart
             unset($_SESSION['cart'][$id]);
         }
     }
+
+    public function createOrder()
+    {
+        //add vào bảng order
+        $orderCode = 'ORDER_' . date('Ymd-His');
+        $paymentMethod = $_POST['payment_method'];
+        $sql = "INSERT INTO orders (`user_id`, `order_code`, `receiver_name`, `receiver_address`, `receiver_mobile`, `total_price`, `delivery_date`, `payment_method`, `status`) 
+            VALUES (:uid, :order_code, :receiver_name, :receiver_address, :receiver_mobile, :total_price, :delivery_date, :payment_method, 1)";
+        $stmt = $this->db->connection->prepare($sql);
+        $stmt->bindParam(':uid', $_SESSION['userInfo']['userId']);
+        $stmt->bindParam(':order_code', $orderCode);
+        $stmt->bindParam(':receiver_name', $_POST['receiver_name']);
+        $stmt->bindParam(':receiver_address', $_POST['receiver_address']);
+        $stmt->bindParam(':receiver_mobile', $_POST['receiver_mobile']);
+        $stmt->bindParam(':total_price', $_POST['total_price']);
+        @$stmt->bindParam(':delivery_date', date('Ymd'));
+        $stmt->bindParam(':payment_method', $paymentMethod);
+
+        $stmt->execute();
+        $orderId = $this->db->connection->lastInsertId();
+
+        if (isset($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $id => $item) {
+                //add vào bảng orders_detail
+                $sql = "INSERT INTO order_details (`order_id`, `product_id`, `quantity`, `price`) 
+                    VALUES (:order_id, :product_id, :quantity, :price)";
+                    $stmt = $this->db->connection->prepare($sql);
+                    $stmt->bindParam(':order_id', $orderId);
+                    $stmt->bindParam(':product_id', $id);
+                    $stmt->bindParam(':quantity', $item['quantity']);
+                    $stmt->bindParam(':price', $item['price']);
+                $stmt->execute();
+            }
+            // huỷ giỏ hàng
+            unset($_SESSION['cart']);
+        }
+        return ['orderId' => $orderId, 'payment_method' => $paymentMethod, 'amount' => $_POST['total_price']];
+    }
 }
