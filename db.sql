@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 09, 2025 at 10:14 AM
+-- Generation Time: Jun 13, 2025 at 09:10 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -37,7 +37,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
-(2, 'Thời trang Nữ');
+(2, 'Thời trang Nữ'),
+(3, 'Thời trang nam'),
+(4, 'Thời trang trẻ em');
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,8 @@ INSERT INTO `orders` (`id`, `user_id`, `order_code`, `receiver_name`, `receiver_
 (15, 6, 'ORDER_20250609-095921', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 200.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
 (16, 6, 'ORDER_20250609-100040', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 305.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
 (17, 6, 'ORDER_20250609-100219', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 305.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
-(18, 6, 'ORDER_20250609-100929', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 2055.00, '2025-06-09', 'VNPay', 1, '2025-06-09');
+(18, 6, 'ORDER_20250609-100929', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 2055.00, '2025-06-09', 'VNPay', 1, '2025-06-09'),
+(19, 6, 'ORDER_20250613-073401', 'Nguyễn Lê Phương', '123/3B Quang Trung', '0987543212', 560.00, '2025-06-13', 'VNPay', 1, '2025-06-13');
 
 -- --------------------------------------------------------
 
@@ -138,7 +141,9 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`
 (20, 17, 1, 1, 105.00),
 (21, 18, 1, 1, 105.00),
 (22, 18, 3, 1, 200.00),
-(23, 18, 5, 5, 350.00);
+(23, 18, 5, 5, 350.00),
+(24, 19, 1, 2, 105.00),
+(25, 19, 5, 1, 350.00);
 
 -- --------------------------------------------------------
 
@@ -155,7 +160,7 @@ CREATE TABLE `products` (
   `price` double(11,2) NOT NULL,
   `sale_price` double(11,2) DEFAULT NULL,
   `quantity` int(3) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -163,11 +168,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `image`, `price`, `sale_price`, `quantity`, `status`) VALUES
-(1, 2, 'Áo thun 2 edit', 'Áo thun 5Áo thun 2Áo thun 3Áo thun 4Áo thun 5', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/2.jpg', 105.00, 95.00, 15, 0),
+(1, 2, 'Áo thun 2 new', 'Áo thun 5Áo thun 2Áo thun 3Áo thun 4Áo thun 5', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/2.jpg', 105.00, 95.00, 2, 0),
 (2, 2, 'Áo Polo nam', 'Áo Polo nam 1\r\nÁo Polo nam 2\r\nÁo Polo nam 3', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/5.jpg', 200.00, 199.00, 10, 1),
 (3, 2, 'Váy nữ model 01', 'Váy nữ model 01\r\nVáy nữ model 01\r\nVáy nữ model 01', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/1.jpg', 200.00, 199.00, 19, 1),
 (4, 2, 'Collot Full Dress', 'Collot Full Dress\r\nCollot Full Dress\r\nCollot Full Dress', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/2.jpg', 450.00, 400.00, 20, 1),
-(5, 2, 'Half Fancy Lady Dress', 'Half Fancy Lady Dress\r\nHalf Fancy Lady Dress\r\nHalf Fancy Lady Dress\r\nHalf Fancy Lady Dress', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/4.jpg', 350.00, NULL, 10, 1);
+(5, 2, 'Half Fancy Lady Dress', 'Half Fancy Lady Dress\r\nHalf Fancy Lady Dress\r\nHalf Fancy Lady Dress\r\nHalf Fancy Lady Dress', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/4.jpg', 350.00, NULL, 0, 1),
+(6, 2, 'Product demo', 'Áo thun 5Áo thun 2Áo thun 3Áo thun 4Áo thun 5', 'https://themezhub.net/kumo-new-update/kumo/assets/img/product/4.jpg', 599.00, 500.00, 111, NULL);
 
 -- --------------------------------------------------------
 
@@ -185,6 +191,8 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `mobile` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `points` int(11) DEFAULT NULL,
   `role` varchar(100) NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -192,11 +200,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `image`, `birthday`, `email`, `mobile`, `address`, `role`) VALUES
-(1, 'phuongnguyen', '123456', 'Nguyen Le Phuong', '', '2025-06-26', 'hnpsolution@gmail.com', '0987543212', '123/3B quang trung', '1'),
-(2, 'lephong', '12345678', 'Nguyen Phong', '', '2025-06-18', 'lephong@gmail.com', '0987543212', '123/3B Quang Trung', '1'),
-(6, 'hnpsolution', '$2y$10$t2Wg3oblUDP64RIqb4l5buNwdpI3hFkeHt9TiY2enTXv4wSK48FGW', 'Nguyễn Lê Phương', NULL, NULL, 'hnpsolution@gmail.com', '0987543212', '123/3B Quang Trung', 'user'),
-(7, 'phuongnl21', '$2y$10$M0AJXzJBsrj0JCUq39i5TOtKaoteS3SB9hB849A//bQv4CmgMzc7G', 'Nguyễn Lê Phương', NULL, NULL, 'phuongnl21@fpt.edu.vn', NULL, NULL, 'user');
+INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `image`, `birthday`, `email`, `mobile`, `address`, `city`, `points`, `role`) VALUES
+(1, 'phuongnguyen', '123456', 'Nguyen Le Phuong', '', '2025-06-26', 'hnpsolution@gmail.com', '0987543212', '123/3B quang trung', 'HCM', 1000, '1'),
+(2, 'lephong', '12345678', 'Nguyen Phong', '', '2025-06-18', 'lephong@gmail.com', '0987543212', '123/3B Quang Trung', 'HCM', 2200, '1'),
+(6, 'hnpsolution', '$2y$10$t2Wg3oblUDP64RIqb4l5buNwdpI3hFkeHt9TiY2enTXv4wSK48FGW', 'Nguyễn Lê Phương', NULL, NULL, 'hnpsolution@gmail.com', '0987543212', '123/3B Quang Trung', 'HaNoi', 100, 'admin'),
+(7, 'phuongnl21', '$2y$10$M0AJXzJBsrj0JCUq39i5TOtKaoteS3SB9hB849A//bQv4CmgMzc7G', 'Nguyễn Lê Phương', NULL, NULL, 'phuongnl21@fpt.edu.vn', NULL, NULL, 'HaNoi', 400, 'user'),
+(8, 'user01', '$2y$10$we0vovSSoeNtCjv0tHwX4OkhOC.XPdI5b.SdL5gKby9y/yM4kS1pq', 'Nguyễn Lê Phương', NULL, NULL, 'user01@gmail.com', NULL, NULL, 'HaNoi', 500, 'user');
 
 --
 -- Indexes for dumped tables
@@ -251,7 +260,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -263,25 +272,25 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
