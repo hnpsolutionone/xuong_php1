@@ -189,7 +189,7 @@ class SiteController
             } else {
                 $user = new User($this->db);
                 if ($userInfo = $user->login($username, $password)) {
-                    $_SESSION['userInfo'] = ['userId' => $userInfo['id'], 'username' => $userInfo['username'], 'fullname' => $userInfo['fullname'], 'address' => $userInfo['address'], 'mobile' => $userInfo['mobile'], 'email' => $userInfo['email']];
+                    $_SESSION['userInfo'] = ['userId' => $userInfo['id'], 'username' => $userInfo['username'], 'fullname' => $userInfo['fullname'], 'address' => $userInfo['address'], 'mobile' => $userInfo['mobile'], 'email' => $userInfo['email'], 'role' => $userInfo['role']];
                     header("Location: index.php");
                     exit;
                 } else {

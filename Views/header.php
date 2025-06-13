@@ -89,7 +89,9 @@
             <li><a href="javascript:void(0);">Tài Khoản</a>
               <ul class="nav-dropdown nav-submenu">
                 <?php if (isset($_SESSION['userInfo']) && !empty($_SESSION['userInfo']['fullname'])): ?>
-                  <li><a>Trang Quản Trị</a></li>
+                  <?php if($_SESSION['userInfo']['role'] == 'admin'): ?>
+                  <li><a href="<?=$baseUrl?>admin.php">Trang Quản Trị</a></li>
+                  <?php endif ?>
                   <li><a href="<?=$baseUrl?>index.php?page=logout">Đăng Xuất</a></li>
                 <?php else: ?>
                 <li><a href="<?=$baseUrl?>index.php?page=login">Đăng nhập</a></li>
