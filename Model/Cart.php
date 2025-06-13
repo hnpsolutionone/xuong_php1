@@ -53,9 +53,12 @@ class Cart
     {
         //add vào bảng order
         $orderCode = 'ORDER_' . date('Ymd-His');
+        
         $paymentMethod = $_POST['payment_method'];
+        
         $sql = "INSERT INTO orders (`user_id`, `order_code`, `receiver_name`, `receiver_address`, `receiver_mobile`, `total_price`, `delivery_date`, `payment_method`, `status`) 
             VALUES (:uid, :order_code, :receiver_name, :receiver_address, :receiver_mobile, :total_price, :delivery_date, :payment_method, 1)";
+        
         $stmt = $this->db->connection->prepare($sql);
         $stmt->bindParam(':uid', $_SESSION['userInfo']['userId']);
         $stmt->bindParam(':order_code', $orderCode);
@@ -67,18 +70,20 @@ class Cart
         $stmt->bindParam(':payment_method', $paymentMethod);
 
         $stmt->execute();
+        // lấy id đơn vừa mới tạo
         $orderId = $this->db->connection->lastInsertId();
 
+        // tạo các dòng trong bảng orders_detail sau khi tạo xong order
         if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $id => $item) {
                 //add vào bảng orders_detail
                 $sql = "INSERT INTO order_details (`order_id`, `product_id`, `quantity`, `price`) 
                     VALUES (:order_id, :product_id, :quantity, :price)";
-                    $stmt = $this->db->connection->prepare($sql);
-                    $stmt->bindParam(':order_id', $orderId);
-                    $stmt->bindParam(':product_id', $id);
-                    $stmt->bindParam(':quantity', $item['quantity']);
-                    $stmt->bindParam(':price', $item['price']);
+                $stmt = $this->db->connection->prepare($sql);
+                $stmt->bindParam(':order_id', $orderId);
+                $stmt->bindParam(':product_id', $id);
+                $stmt->bindParam(':quantity', $item['quantity']);
+                $stmt->bindParam(':price', $item['price']);
                 $stmt->execute();
             }
             // huỷ giỏ hàng
