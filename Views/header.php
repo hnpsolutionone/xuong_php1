@@ -83,7 +83,7 @@
             </li>
             <li>
               <a href="<?=$baseUrl?>index.php?page=cart">
-                <i class="lni lni-shopping-basket"></i><span class="dn-counter theme-bg">3</span>
+                <i class="lni lni-shopping-basket"></i><span class="dn-counter theme-bg"><?=isset($_SESSION['cart'])?count($_SESSION['cart']):0?></span>
               </a>
             </li>
             <li><a href="javascript:void(0);">Tài Khoản</a>
