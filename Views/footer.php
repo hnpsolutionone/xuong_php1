@@ -601,6 +601,76 @@
       document.getElementById("Search").style.display = "none";
     }
   </script>
+
+  <!-- Chatbot Icon -->
+<style>
+#chatbot-icon {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  background: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 32px;
+}
+#chatbot-popup {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  z-index: 10000;
+  width: 400px;
+  height: 600px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+#chatbot-popup .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 22px;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+</style>
+
+<div id="chatbot-icon" title="Chat với trợ lý">
+  <i class="lni lni-comments"></i>
+</div>
+<div id="chatbot-popup">
+  <button class="close-btn" onclick="closeChatbot()">&times;</button>
+  <iframe
+    src="https://www.chatbase.co/chatbot-iframe/c1WykKRbou8-o9jFrry0L"
+    width="100%"
+    height="100%"
+    style="border:0;"
+    allow="clipboard-write"
+  ></iframe>
+</div>
+
+<script>
+  const chatbotIcon = document.getElementById('chatbot-icon');
+  const chatbotPopup = document.getElementById('chatbot-popup');
+  chatbotIcon.onclick = function() {
+    chatbotPopup.style.display = 'block';
+  };
+  function closeChatbot() {
+    chatbotPopup.style.display = 'none';
+  }
+</script>
 </body>
 
 </html>
