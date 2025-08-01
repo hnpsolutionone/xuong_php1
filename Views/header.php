@@ -11,7 +11,7 @@
 
   <title>Kumo- Fashion eCommerce HTML Template</title>
   <!-- Custom CSS -->
-  <link href="<?=$baseUrl?>/Views/assets/css/styles.css" rel="stylesheet">
+  <link href="<?=$baseUrl?>Views/assets/css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -24,7 +24,7 @@
       <nav id="navigation" class="navigation navigation-landscape">
         <div class="nav-header">
           <a class="nav-brand" href="<?=$baseUrl?>">
-            <img src="<?=$baseUrl?>/Views/assets/img/logo.png" class="logo" alt="" />
+            <img src="<?=$baseUrl?>Views/assets/img/logo.png" class="logo" alt="" />
           </a>
           <div class="nav-toggle"></div>
           <div class="mobile_nav">

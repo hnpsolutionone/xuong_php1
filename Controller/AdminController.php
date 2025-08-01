@@ -51,7 +51,7 @@ class AdminController {
         $productModel = new Product($this->db);
         $product = $productModel->getProductById($id);
         
-        include 'Views/Admin/product_edit.php';
+        include 'Views/admin/product_edit.php';
     }
 
     public function create_product() {
@@ -66,7 +66,7 @@ class AdminController {
         
         $baseUrl = $this->baseUrl;
         // nạp form để chỉnh thêm product
-        include 'Views/Admin/create_product.php';
+        include 'Views/admin/create_product.php';
     }
 
     public function delete() {
